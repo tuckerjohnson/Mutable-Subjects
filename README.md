@@ -2,6 +2,16 @@
 *for corporeal and virtual marimbas*
 composed and created by Tucker Johnson
 
+### How to install and open
+
+1. Download the version of supercollider for your Operating System here:https://supercollider.github.io/download
+
+2. Open the MutableSubjects.scd file in supercollider.
+
+3. Select the "language" drop down from the menu bar and then press "Evaluate File"
+(alternative to step 3: right-click in the document and select "select all" the press shift+enter to evaluate.
+
+
 ## Program note
 *Mutable Subjects* is a work performed entirely from a custom supercollider program. The piece begins with the presentation of two pitch collections, one by the human performer, and one by the computer. Properties of the relationship between these collections are used by the supercollider program to structure improvisation into  discreet sections in the piece. It is highly unlikely that any two performances of this work will share the same structure. The human and the virtual marimba player do not share the same access to this structure, as the human player has to interpret the same kinds of material the virtual performer feels.
 
@@ -10,7 +20,7 @@ The title *Mutable Subjects* has many meanings, referring to the possibility for
 
 ## Performance instruction
 
-To start the program open MutableSubjects.scd in supercollider. Select "language" from the drop-down menu, and choose "Evaluate file." The program window will open.
+To start the program open MutableSubjects.scd in supercollider. Select "language" from the drop-down menu, and choose "Evaluate file," or right-click in the document and select "select all" the press shift+enter to evaluate. The program window will open.
 
 At the outset of the piece the performer is asked to play and select a pitch collection. After clicking the arrow, the virtual performer will select a pitch collection of the same size. As soon as the virtual player finishes playing this collection, the piece will begin.
 
