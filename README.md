@@ -8,8 +8,7 @@ composed and created by Tucker Johnson
 
 2. Open the MutableSubjects.scd file in supercollider.
 
-3. Select the "language" drop down from the menu bar and then press "Evaluate File"
-(alternative to step 3: right-click in the document and select "select all" the press shift+enter to evaluate.
+3. Follow the instructions in the program for evaluating the file.
 
 
 ## Program note

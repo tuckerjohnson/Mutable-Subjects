@@ -1,21 +1,50 @@
-//Mutable Subjects (version for corporeal and virtual marimbas) non-interactive 😞
+//Mutable Subjects (version for corporeal and virtual marimbas)
+//
+//
+//
+//------INSTRUCTIONS for Evaluating File-----------
+//Before you can run this program you must alter the following line.
+//Replace this line with the complete path to the directory "MutableObjects/SAMPS" (you can do this by copying the file path from finder or another file manager)
 
+~samplepath = "/home/tuckerj/Documents/Supercollider/MutableObjects/SAMPS";
+
+//Once you have changed the line above, highlight the following line and press shift+enter
+
+~marstr = Array.new; ~folder = PathName.new(~samplepath); ~folder.entries.do({ arg path; ~marstr = ~marstr.add(Buffer.read(s, path.fullPath));});
+
+//Now, in the "Language" drop-down menu click "evaluate file"
+//the piece will begin!!
+//
+//
+//
+///////////////////////////////////////////////////////////////////////////////DO NOT MODIFY
 //marimba synth*****marimba synth
-SynthDef(\virtmarimba, {
-	|freq = 440, t60=1.3, pitchy=1, amp=0.25, pan = 0|
-	var sig, exciter;
-	exciter = WhiteNoise.ar(0.2) * EnvGen.ar(Env.perc(0.001, 0.005)) * 0.2;
-	sig = DynKlank.ar(
-		`[
-			[1, 2, 3, 4, 5, 6],   // freqs
-			[1.2, 0.244, 0.691, 0.2491, 0.394, 0.23], // amplitudes
-			[1, 0.205, 0.5, 0.196, 0.239, 0.1, 0.05]*t60
-		],
-		exciter,
-		freqscale: freq);
+
+SynthDef.new(\virtmarimba, {
+	arg amp=1, out=0, pan=0, pitchy=1, t60=1.3, buf=5;
+	var sig;
+	sig = PlayBuf.ar(2, buf-45);
+	sig = sig * amp;
 	DetectSilence.ar(sig, 0.001, 0.5, doneAction:2);
-	Out.ar(0, Pan2.ar(sig, pan, amp));
+	Out.ar(out, sig);
 }).add;
+
+//Synth.new(\virtmarimba, [\buf, 46]);
+//SynthDef(\virtmarimba, {
+//	|freq = 440, t60=1.3, pitchy=1, amp=0.25, pan = 0|
+//	var sig, exciter;
+//	exciter = WhiteNoise.ar(0.2) * EnvGen.ar(Env.perc(0.001, 0.005)) * 0.2;
+//	sig = DynKlank.ar(
+//		`[
+//			[1, 2, 3, 4, 5, 6],   // freqs
+//			[1.2, 0.244, 0.691, 0.2491, 0.394, 0.23], // amplitudes
+//			[1, 0.205, 0.5, 0.196, 0.239, 0.1, 0.05]*t60
+//		],
+//		exciter,
+//		freqscale: freq);
+//	DetectSilence.ar(sig, 0.001, 0.5, doneAction:2);
+//	Out.ar(0, Pan2.ar(sig, pan, amp));
+//}).add;
 
 //structure routines*****structure routines
 ~structure = Routine.new({
@@ -405,7 +434,7 @@ SynthDef(\virtmarimba, {
 	~octave = [[48, 60, 72].scramble, [48, 60, 72].scramble, [48, 60, 72].scramble, [48, 60, 72].scramble];
 	z = Pbind(
 		\instrument, \virtmarimba,
-		\midinote, Pseq(y+~octave.lace(y.size)),
+		\buf, Pseq(y+~octave.lace(y.size)),
 		\dur, Prand([0.8,0.85,0.9,0.95,1,1.05,1.1],y.size),
 		\amp, 0.5,
 	).play; AppClock.play(~begin);
@@ -424,7 +453,7 @@ SynthDef(\virtmarimba, {
 	~time = (Array.exprand(~timemake.size, 0.001, 0.4)+~timemake);
 	z = Pbind(
 		\instrument, \virtmarimba,
-		\midinote, Prand(~note, inf),
+		\buf, Prand(~note, inf),
 		\dur, Prand(~time, inf),
 		\amp, Prand(~db, inf),
 	).play; ((~delts.at(0)+1 * d)-0.3).yield; z.stop;
@@ -442,7 +471,7 @@ SynthDef(\virtmarimba, {
 	~time = (Array.exprand(~timemake.size, 0.001, 0.4)+~timemake);
 	z = Pbind(
 		\instrument, \virtmarimba,
-		\midinote, Prand(~note, inf),
+		\buf, Prand(~note, inf),
 		\dur, Prand(~time, inf),
 		\amp, 0.5,
 	).play; ((~delts.at(1)+1 * d)-0.3).yield; z.stop;
@@ -460,7 +489,7 @@ SynthDef(\virtmarimba, {
 	~time = (Array.exprand(~timemake.size, 0.001, 0.4)+~timemake);
 	z = Pbind(
 		\instrument, \virtmarimba,
-		\midinote, Prand(~note, inf),
+		\buf, Prand(~note, inf),
 		\dur, Prand(~time, inf),
 		\amp, 0.5,
 	).play; ((~delts.at(2)+1 * d)-0.3).yield; z.stop;
@@ -478,7 +507,7 @@ SynthDef(\virtmarimba, {
 	~time = (Array.exprand(~timemake.size, 0.001, 0.4)+~timemake);
 	z = Pbind(
 		\instrument, \virtmarimba,
-		\midinote, Prand(~note, inf),
+		\buf, Prand(~note, inf),
 		\dur, Prand(~time, inf),
 		\amp, 0.5,
 	).play; ((~delts.at(3)+1 * d)-0.3).yield; z.stop;
@@ -496,7 +525,7 @@ SynthDef(\virtmarimba, {
 	~time = (Array.exprand(~timemake.size, 0.001, 0.4)+~timemake);
 	z = Pbind(
 		\instrument, \virtmarimba,
-		\midinote, Prand(~note, inf),
+		\buf, Prand(~note, inf),
 		\dur, Prand(~time, inf),
 		\amp, 0.5,
 	).play; ((~delts.at(4)+1 * d)-0.3).yield; z.stop;
@@ -514,7 +543,7 @@ SynthDef(\virtmarimba, {
 	~time = (Array.exprand(~timemake.size, 0.001, 0.4)+~timemake);
 	z = Pbind(
 		\instrument, \virtmarimba,
-		\midinote, Prand(~note, inf),
+		\buf, Prand(~note, inf),
 		\dur, Prand(~time, inf),
 		\amp, 0.5,
 	).play; ((~delts.at(5)+1 * d)-0.3).yield; z.stop;
@@ -532,7 +561,7 @@ SynthDef(\virtmarimba, {
 	~time = (Array.exprand(~timemake.size, 0.001, 0.4)+~timemake);
 	z = Pbind(
 		\instrument, \virtmarimba,
-		\midinote, Prand(~note, inf),
+		\buf, Prand(~note, inf),
 		\dur, Prand(~time, inf),
 		\amp, 0.5,
 	).play; ((~delts.at(6)+1 * d)-0.3).yield; z.stop;
@@ -550,7 +579,7 @@ SynthDef(\virtmarimba, {
 	~time = (Array.exprand(~timemake.size, 0.001, 0.4)+~timemake);
 	z = Pbind(
 		\instrument, \virtmarimba,
-		\midinote, Prand(~note, inf),
+		\buf, Prand(~note, inf),
 		\dur, Prand(~time, inf),
 		\amp, 0.5,
 	).play; ((~delts.at(7)+1 * d)-0.3).yield; z.stop;
@@ -568,7 +597,7 @@ SynthDef(\virtmarimba, {
 	~time = (Array.exprand(~timemake.size, 0.001, 0.4)+~timemake);
 	z = Pbind(
 		\instrument, \virtmarimba,
-		\midinote, Prand(~note, inf),
+		\buf, Prand(~note, inf),
 		\dur, Prand(~time, inf),
 		\amp, 0.5,
 	).play; ((~delts.at(8)+1 * d)-0.3).yield; z.stop;
@@ -590,7 +619,9 @@ w = Window.new("Mutable Subjects", Rect(400, 200, 710, 500), false, true).front;
 ~introinstructionone = "Select a collection of between 3 and 9 pitches and play them in any octave. Then ADVANCE.";
 ~introinstructiontwo = "Virtual marimba will select a pitch collection of the same size and perform it. Then the piece will automatically continue to section 1";
 
+
 ~begin = Routine.new({
+
 	~load = StaticText(w, Rect(0, 90, 300, 20)).string = "LOADING";
 	~load.align = \center; ~load.font = ~fthre; 0.5.yield;
 	~load.stringColor = Color.rand; 0.3.yield; ~load.stringColor = Color.rand; 0.2.yield;
