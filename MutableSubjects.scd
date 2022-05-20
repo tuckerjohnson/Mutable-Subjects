@@ -8,10 +8,6 @@
 
 ~samplepath = "/home/tuckerj/Documents/Supercollider/MutableObjects/SAMPS";
 
-//Once you have changed the line above, highlight the following line and press shift+enter
-
-~marstr = Array.new; ~folder = PathName.new(~samplepath); ~folder.entries.do({ arg path; ~marstr = ~marstr.add(Buffer.read(s, path.fullPath));});
-
 //Now, in the "Language" drop-down menu click "evaluate file"
 //the piece will begin!!
 //
@@ -614,11 +610,14 @@ w = Window.new("Mutable Subjects", Rect(400, 200, 710, 500), false, true).front;
 ~title = StaticText(w, Rect(0, 10, 710, 20)).string = "Mutable Subjects                (for corporeal and virtual marimbas)"; ~title.font = ~fthre;
 ~composer = StaticText(w, Rect(105, 25, 500, 70)).string = "composed and created by Tucker Johnson"; ~composer.font = ~fone;
 ~start = Button(w, Rect(305, 100, 75, 75)).states_([["begin", Color.black, Color.rand], ["begin", Color.black, Color.white]]).mouseDownAction_({
-	~title.remove; ~composer.remove; ~start.remove; AppClock.play(~begin); s.boot;}); ~start.font = ~ftwo;
+	~title.remove; ~composer.remove; ~start.remove; AppClock.play(~begin); ~folder.entries.do({ arg path; ~marstr = ~marstr.add(Buffer.read(s, path.fullPath));});}); ~start.font = ~ftwo;
 ~title.align = \center;
 ~introinstructionone = "Select a collection of between 3 and 9 pitches and play them in any octave. Then ADVANCE.";
 ~introinstructiontwo = "Virtual marimba will select a pitch collection of the same size and perform it. Then the piece will automatically continue to section 1";
 
+~marstr = Array.new;
+~folder = PathName.new(~samplepath);
+s.boot;
 
 ~begin = Routine.new({
 
