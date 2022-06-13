@@ -22,7 +22,7 @@
 
 ~samplepath = thisProcess.nowExecutingPath.dirname +/+ "SAMPS";
 
-//  replace everything after the equal sign with the complete path to the "MutableObjects/SAMPS"
+//  replace everything after the equal sign with the complete path to the "Mutable-Subjects/SAMPS"
 //  be sure to end the line with a semi-colon.
 //
 //
