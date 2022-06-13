@@ -21,8 +21,19 @@ The title *Mutable Subjects* has many meanings, referring to the possibility for
 
 To start the program open MutableSubjects.scd in supercollider. Select "language" from the drop-down menu, and choose "Evaluate file," or right-click in the document and select "select all" the press shift+enter to evaluate. The program window will open.
 
-At the outset of the piece the performer is asked to play and select a pitch collection. After clicking the arrow, the virtual performer will select a pitch collection of the same size. As soon as the virtual player finishes playing this collection, the piece will begin.
+At the outset of the piece the performer is asked to select then play a pitch collection.
+After clicking the arrow, the virtual performer will select a pitch collection of the same size.
+As soon as the virtual player finishes playing this collection, section 1 of the piece will begin.
 
-The performer should improvise with the pitch-classes displayed in black with a white, which can be performed in any octave. The blacked out pitch classes should not be played. Two sliders are provided to help suggest note density, and dymanic. These sliders suggest an average point, but the surface of the improvisation should not remain consistent, but wander around these points. Dynamic is notated as p(piano), m(mezzo), and f(forte), with the slider suggesting a smooth linear space between these markings. Density is suggested as notes-per-second, the linear space being between 5 notes-per-second and one note every 5 seconds, with 1 note-per-second in the center.
+The performer should improvise with the pitch-classes displayed in any octave.
+The blacked out pitch classes should not be played.
+Two sliders are provided to help show attack density, and dymanic.
+The surface of the improvisation should not remain fixed on these values, rather it should wander around these points.
+Dynamic is notated between p(piano) and f(forte), with the slider suggesting a smooth linear space between these markings.
+Density is notated as the number of attacks per 5 seconds.
+The minimum density is 1 attack every 5 seconds and the maximum is 17 attacks every 5 seconds.
 
-The performer should feel free to get creative in the improvisation--the virtual performer is rarely playing the same density and dymanic as the human. The piece should create a sonic and semantic push and pull between the performers.
+The provided pitch classes and slider values will change in each section of the piece.
+The current section is displayed at the top of the window.
+The duration of each section is displayed on the right side of the window, with the complete duration of the piece in the top right corner.
+When a new section is coming up, the check box will flash. Once the box is checked the next section will begin.

@@ -3,13 +3,31 @@
 //
 //
 //------INSTRUCTIONS for Evaluating File-----------
-//Before you can run this program you must alter the following line.
-//Replace this line with the complete path to the directory "MutableObjects/SAMPS" (you can do this by copying the file path from finder or another file manager)
+//
+//  There are two ways to run this file:
+//
+//  1) From the Supercollider IDE: Select the "Language" drop down and choose "Evaluate File"
+//
+//  OR
+//
+//  2) From the command line: Navigate to the "MutableObjects" folder and run the folowing 'sclang MutableSubjects.scd'
+//
+//
+//
+//
+//
+//
+//  IF YOU ARE GETTING AN ERROR FOR BUFFERS
+//  The following is used by supercollider to locate samples:
 
-~samplepath = "/home/tuckerj/Documents/Supercollider/MutableObjects/SAMPS";
+~samplepath = thisProcess.nowExecutingPath.dirname +/+ "SAMPS";
 
-//Now, in the "Language" drop-down menu click "evaluate file"
-//the piece will begin!!
+//  replace everything after the equal sign with the complete path to the "MutableObjects/SAMPS"
+//  be sure to end the line with a semi-colon.
+//
+//
+//
+//
 //
 //
 //
@@ -184,14 +202,24 @@ SynthDef.new(\virtmarimba, {
 
 ~secA = Routine.new({
 	~toptex.string = "Section A"; AppClock.play(~yA);
-	~dyn = Slider(w, Rect(55, 200, 200, 30)).acceptsMouse = false;
-	~den = Slider(w, Rect(305, 200, 200, 30)).acceptsMouse = false;
-	~dynlab1 = StaticText(w, Rect(60, 160, 195, 30)).string = "p"; ~dynlab1.font = ~fthre; ~dynlab1.align = \left;
-	~dynlab2 = StaticText(w, Rect(60, 160, 195, 30)).string = "m"; ~dynlab2.font = ~fthre; ~dynlab2.align = \center;
-	~dynlab3 = StaticText(w, Rect(60, 160, 195, 30)).string = "f"; ~dynlab3.font = ~fthre; ~dynlab3.align = \right;
-	~denlab1 = StaticText(w, Rect(310, 160, 195, 30)).string = "5"; ~denlab1.font = ~fthre; ~denlab1.align = \left;
-	~denlab2 = StaticText(w, Rect(310, 160, 195, 30)).string = "1"; ~denlab2.font = ~fthre; ~denlab2.align = \center;
-	~denlab3 = StaticText(w, Rect(310, 160, 195, 30)).string = "1/5"; ~denlab3.font = ~fthre; ~denlab3.align = \right;
+	~dyntex = StaticText(w, Rect(25, 196, 612, 30)).string = "average dynamic"; ~dyntex.font = ~fthre; ~dyntex.align = \center;
+	~dyn = Slider(w, Rect(25, 240, 612, 50)).acceptsMouse = false;
+	~dentex = StaticText(w, Rect(25, 96, 612, 30)).string = "average attacks per 5 seconds"; ~dentex.font = ~fthre; ~dentex.align = \center;
+	~den = Slider(w, Rect(25, 140, 612, 50)).acceptsMouse = false;
+	~dynlab1 = StaticText(w, Rect(25, 216, 610, 30)).string = "p"; ~dynlab1.font = ~fthre; ~dynlab1.align = \left;
+	~dynlabmp = StaticText(w, Rect(25, 216, 305, 30)).string = "mp"; ~dynlabmp.font = ~fthre; ~dynlabmp.align = \center;
+	~dynlab2 = StaticText(w, Rect(25, 216, 610, 30)).string = "m"; ~dynlab2.font = ~fthre; ~dynlab2.align = \center;
+	~dynlabmf = StaticText(w, Rect(331, 216, 305, 30)).string = "mf"; ~dynlabmf.font = ~fthre; ~dynlabmf.align = \center;
+	~dynlab3 = StaticText(w, Rect(25, 216, 610, 30)).string = "f"; ~dynlab3.font = ~fthre; ~dynlab3.align = \right;
+	~denlab1 = StaticText(w, Rect(25, 116, 610, 30)).string = "1"; ~denlab1.font = ~fthre; ~denlab1.align = \left;
+	~denlab2 = StaticText(w, Rect(25, 116, 76.5, 30)).string = "3"; ~denlab2.font = ~fthre; ~denlab2.align = \right;
+	~denlab3 = StaticText(w, Rect(101.5, 116, 76.5, 30)).string = "5"; ~denlab3.font = ~fthre; ~denlab3.align = \right;
+	~denlab4 = StaticText(w, Rect(178, 116, 76.5, 30)).string = "7"; ~denlab4.font = ~fthre; ~denlab4.align = \right;
+	~denlab5 = StaticText(w, Rect(254.5, 116, 76.5, 30)).string = "9"; ~denlab5.font = ~fthre; ~denlab5.align = \right;
+	~denlab6 = StaticText(w, Rect(331, 116, 76.5, 30)).string = "11"; ~denlab6.font = ~fthre; ~denlab6.align = \right;
+	~denlab7 = StaticText(w, Rect(407.5, 116, 76.5, 30)).string = "13"; ~denlab7.font = ~fthre; ~denlab7.align = \right;
+	~denlab8 = StaticText(w, Rect(484, 116, 76.5, 30)).string = "15"; ~denlab8.font = ~fthre; ~denlab8.align = \right;
+	~denlab9 = StaticText(w, Rect(560.5, 116, 76.5, 30)).string = "17"; ~denlab9.font = ~fthre; ~denlab9.align = \right;
 	~xvec = [(~tmat.rowAt(0).occurrencesOf(1) + ~tmat.rowAt(0).occurrencesOf(11)), (~tmat.rowAt(0).occurrencesOf(2) + ~tmat.rowAt(0).occurrencesOf(10)),
 		(~tmat.rowAt(0).occurrencesOf(3) + ~tmat.rowAt(0).occurrencesOf(9)), (~tmat.rowAt(0).occurrencesOf(4) + ~tmat.rowAt(0).occurrencesOf(8)),
 		(~tmat.rowAt(0).occurrencesOf(5) + ~tmat.rowAt(0).occurrencesOf(7)), (~tmat.rowAt(0).occurrencesOf(6))];
@@ -607,21 +635,59 @@ x = Array.new(12);
 y = Array.new(12);
 d = 13;
 w = Window.new("Mutable Subjects", Rect(400, 200, 710, 500), false, true).front;
-~title = StaticText(w, Rect(0, 10, 710, 20)).string = "Mutable Subjects                (for corporeal and virtual marimbas)"; ~title.font = ~fthre;
-~composer = StaticText(w, Rect(105, 25, 500, 70)).string = "composed and created by Tucker Johnson"; ~composer.font = ~fone;
-~start = Button(w, Rect(305, 100, 75, 75)).states_([["begin", Color.black, Color.rand], ["begin", Color.black, Color.white]]).mouseDownAction_({
-	~title.remove; ~composer.remove; ~start.remove; AppClock.play(~begin); ~folder.entries.do({ arg path; ~marstr = ~marstr.add(Buffer.read(s, path.fullPath));});}); ~start.font = ~ftwo;
+~title = StaticText(w, Rect(0, 10, 710, 20)).string = "Mutable Subjects"; ~title.font = ~fthre;
 ~title.align = \center;
+~testertext = StaticText(w, Rect(25, 445, 75, 70)).string = "-----------"; ~testertext.align = \center;
+~composer = StaticText(w, Rect(0, 10, 710, 70)).string = "composed and created by Tucker Johnson"; ~composer.font = ~fone; ~composer.align = \center;
+~testb = Button(w, Rect(25, 390, 75, 75)).states_([["Test Output", Color.black, Color.rand], ["Test Output", Color.black, Color.white]]).mouseDownAction_({ ~testrunsound.reset; AppClock.play(~testrunsound);});
+
+~instructa = StaticText(w, Rect(175, 205, 535, 20)).string = "notational break-down:"; ~instructa.align = \center; ~instructa.font = ~fthre;
+~instructb = StaticText(w, Rect(175, 245, 535, 50)).string = "At the outset of the piece the performer is asked to select then play a pitch collection. After clicking the arrow, the virtual performer will select a pitch collection of the same size. As soon as the virtual player finishes playing this collection, section 1 of the piece will begin.";
+
+~instructc = StaticText(w, Rect(175, 300, 535, 100)).string = "The performer should improvise with the pitch-classes displayed in any octave. The blacked out pitch classes should not be played. Two sliders are provided to help show attack density, and dymanic. The surface of the improvisation should not remain fixed on these values, rather it should wander around these points. Dynamic is notated between p(piano) and f(forte), with the slider suggesting a smooth linear space between these markings. Density is notated as the number of attacks per 5 seconds. The minimum density is 1 attack every 5 seconds and the maximum is 17 attacks every 5 seconds.";
+
+~instructd = StaticText(w, Rect(175, 400, 535, 60)).string = "The provided pitch classes and slider values will change in each section of the piece. The current section is displayed at the top of the window. The duration of each section is displayed on the right side of the window, with the complete duration of the piece in the top right corner. When a new section is coming up, the check box will flash. Once the box is checked the next section will begin.";
+
+
+
+~instructb.align =\left; ~instructb.font("Courier", 12);
+~instructc.align =\left; ~instructc.font("Courier", 12);
+~instructd.align =\left; ~instructd.font("Courier", 12);
+
+
+
+
+~start = Button(w, Rect(280, 80, 150, 75)).states_([["begin", Color.black, Color.rand], ["begin", Color.black, Color.white]]).mouseDownAction_({
+	~title.remove; ~composer.remove; ~instructa.remove; ~instructd.remove; ~instructa.remove; ~instructb.remove; ~instructc.remove; ~testertext.remove; ~start.remove; ~testb.remove; AppClock.play(~begin); ~folder.entries.do({ arg path; ~marstr = ~marstr.add(Buffer.read(s, path.fullPath));});}); ~start.font = ~ftwo;
 ~introinstructionone = "Select a collection of between 3 and 9 pitches and play them in any octave. Then ADVANCE.";
 ~introinstructiontwo = "Virtual marimba will select a pitch collection of the same size and perform it. Then the piece will automatically continue to section 1";
 
 ~marstr = Array.new;
 ~folder = PathName.new(~samplepath);
 s.boot;
+~testseq = Array.series(39, 45, 1);
+w.onClose = {Server.freeAll; CmdPeriod.run; Server.killAll;};
+
+
+~testrunsound = Routine.new({
+	~testertext.string = "Loading Samples";
+	~folder.entries.do({ arg path; ~marstr = ~marstr.add(Buffer.read(s, path.fullPath));});
+	2.5.yield;
+	~testertext.string = "PLAYING NOW";
+	z = Pbind(
+		\instrument, \virtmarimba,
+		\buf, Pseq(~testseq),
+		\dur, Prand([0.15],~testseq.size),
+		\amp, 0.5,
+	).play;
+	5.85.yield;
+	~testertext.string = "-----------";
+	~testb.valueAction = 0;
+});
 
 ~begin = Routine.new({
 
-	~load = StaticText(w, Rect(0, 90, 300, 20)).string = "LOADING";
+	~load = StaticText(w, Rect(0, 0, 710, 500)).string = "LOADING";
 	~load.align = \center; ~load.font = ~fthre; 0.5.yield;
 	~load.stringColor = Color.rand; 0.3.yield; ~load.stringColor = Color.rand; 0.2.yield;
 	~load.stringColor = Color.rand; 0.3.yield; ~load.stringColor = Color.rand; 0.5.yield;
@@ -666,6 +732,3 @@ s.boot;
 	~structure.next.yield; AppClock.play(~secA); AppClock.play(~tim);  ~instruc.remove; ~virt.remove;
 	 ~xdisp.remove; ~ydisp.remove;
 });
-
-
-	"good to go bud"
